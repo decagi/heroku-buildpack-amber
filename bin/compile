@@ -95,7 +95,7 @@ eval $(parse_yaml shard.yml "shard_")
 
 for target in $(compgen -A variable | grep shard_targets | sed 's/shard_targets_\(.*\)_main/\1/g'); do
   start "Building src/${target}.cr (auto-detected from shard.yml)"
-    AMBER_ENV=production crystal build --release --no-debug $BUILD_DIR/src/${target}.cr -o $BUILD_DIR/bin/${target}
+    AMBER_ENV=production shards build --release --no-debug ${target} -o $BUILD_DIR/bin/${target}
     chmod +x $BUILD_DIR/bin/${target}
   finished
 done
